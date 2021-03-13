@@ -9,7 +9,7 @@ import sys
 from LedIndicatorWidget import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel
-from coolstory import write_read
+from serial_arduino import write_read
 # =============================================================================
 
 def gui_start():
