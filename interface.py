@@ -16,7 +16,13 @@ class Window(QMainWindow):
         """Initializer."""
         super().__init__(parent)
         self.setWindowTitle("Testing UI")
-        self.resize(1920, 1080)
+        #self.resize(800, 480)
+        width = 800
+        height = 480
+
+        self.setFixedWidth(width)
+        self.setFixedHeight(height)
+
         self.centralWidget = windowLayout(self)
         self.setCentralWidget(self.centralWidget)
         self.createMenuBar()
