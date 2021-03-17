@@ -1,15 +1,12 @@
 # =============================================================================
 # Created By  : Anton Sundqvist
-# Created Date: 2021-02-23
+# Created Date: 2021-03-17
 # =============================================================================
 """"""
 # =============================================================================
 # Imports
-import sys
 from LedIndicatorWidget import *
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QMainWindow, QMenuBar, QMenu, QAction, QTabWidget
+from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from serial_arduino_com import *
 # =============================================================================
 
@@ -150,28 +147,3 @@ class windowLayout(QWidget):
         self.MapLayout.addLayout(self.VerticalButtonLayout)
         self.MapLayout.addWidget(self.label)
         self.setLayout(self.MapLayout)        
-
-class Window(QMainWindow):
-    """Main Window."""
-    def __init__(self, parent=None):
-        """Initializer."""
-        super().__init__(parent)
-        self.setWindowTitle("Testing UI")
-        self.resize(1920, 1080)
-        self.centralWidget = windowLayout(self)
-        self.setCentralWidget(self.centralWidget)
-        self.createMenuBar()
-
-    def createMenuBar(self):
-        menuBar = self.menuBar()
-        fileMenu = QMenu("&File", self)
-        menuBar.addMenu(fileMenu)
-        # Creating menus using a title
-        editMenu = menuBar.addMenu("&Edit")
-        helpMenu = menuBar.addMenu("&Help")
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    win = Window()
-    win.show()
-    sys.exit(app.exec_())
