@@ -29,8 +29,6 @@ class Window(QMainWindow):
 
         self.layout = QHBoxLayout(self.centralWidget)
         self.layout.addWidget(windowLayout(parent))
-        #layout.addWidget(QPushButton("Button at (0, 0)"), 0, 0)
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
