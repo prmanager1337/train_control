@@ -21,26 +21,16 @@ class Window(QMainWindow):
         self.setFixedWidth(width)
         self.setFixedHeight(height)
 
-        #self.centralWidget = windowLayout(self)
-        #self.setCentralWidget(self.centralWidget)
-
         self.label = QLabel(self)
         pixmap = QPixmap('traingui1.png')
         self.label.setPixmap(pixmap)
-
         self.centralWidget = self.label
         self.setCentralWidget(self.centralWidget)
 
+        self.layout = QHBoxLayout(self.centralWidget)
+        self.layout.addWidget(windowLayout(parent))
+        #layout.addWidget(QPushButton("Button at (0, 0)"), 0, 0)
 
-        self.createMenuBar()
-
-    def createMenuBar(self):
-        menuBar = self.menuBar()
-        fileMenu = QMenu("&File", self)
-        menuBar.addMenu(fileMenu)
-        # Creating menus using a title
-        editMenu = menuBar.addMenu("&Edit")
-        helpMenu = menuBar.addMenu("&Help")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
