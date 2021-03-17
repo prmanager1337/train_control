@@ -42,7 +42,7 @@ class windowLayout(QWidget):
         super(QWidget, self).__init__(parent)
 
         self.label = QLabel(self)
-        pixmap = QPixmap('train.png')
+        pixmap = QPixmap('traingui1.png')
         self.label.setPixmap(pixmap)
 
         self.MapLayout = QHBoxLayout()
