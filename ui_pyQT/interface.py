@@ -28,7 +28,7 @@ class Window(QMainWindow):
         self.setCentralWidget(self.centralWidget)
 
         self.layout = QHBoxLayout(self.centralWidget)
-        self.layout.addWidget(windowLayout(parent))
+        self.layout.addWidget(windowLayout(self))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
