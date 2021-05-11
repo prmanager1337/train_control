@@ -11,10 +11,10 @@ from smbus import SMBus
 # =============================================================================
 
 def write_i2c_arduino(command): 
-    address = round(command / 100) + 1 
-    command_send = command % 100
+    #address = round(command / 100) + 1 
+    #command_send = command % 100
 
     bus = SMBus(1) #indicates /dev/ic2-1
-    bus.write_byte(address, 0x2)
+    bus.write_byte(0x2, 0x2)
 
     print(command)
