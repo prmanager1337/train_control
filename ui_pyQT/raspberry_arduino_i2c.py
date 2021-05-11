@@ -10,11 +10,11 @@ Raspberry PI to a ATMEGA328-PU"""
 from smbus import SMBus
 # =============================================================================
 
-def write_i2c_arduino(command): 
-    #address = round(command / 100) + 1 
-    #command_send = command % 100
+def write_i2c_arduino(command):
+    address = round(int(command) / 100) + 1 
+    command_send = int(command) % 100
 
     bus = SMBus(1) #indicates /dev/ic2-1
-    bus.write_byte(0x2, 0x2)
+    bus.write_byte(address, command_send)
 
     print(command)
