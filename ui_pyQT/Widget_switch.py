@@ -8,12 +8,14 @@
 from LedIndicatorWidget import *
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtGui import *
-from serial_arduino_com import write_serial_arduino
+#from serial_arduino_com import write_serial_arduino
+from raspberry_arduino_i2c import write_i2c_arduino
 # =============================================================================
 
 class TrainSwitch(QWidget):
-    def __init__(self, parent, train_switch):
+    def __init__(self, parent, train_switch, command_routing):
         super(QWidget, self).__init__(parent)
+        self.command_routing = command_routing
         self.train_switch = train_switch
         self.layout = QHBoxLayout()
         self.button = QPushButton()
@@ -37,10 +39,12 @@ class TrainSwitch(QWidget):
         self.led.setChecked(not self.led.isChecked())
 
         if self.button.isChecked(): 
-            write_serial_arduino(self.train_switch + "1")
+            #write_serial_arduino(self.command_routing + "1")
+            write_i2c_arduino(self.command_routing+ "2")
         # if it is unchecked 
         else: 
-            write_serial_arduino(self.train_switch + "2")
+            #write_serial_arduino(self.command_routing+ "2")
+            write_i2c_arduino(self.command_routing+ "2")
 
     
 
@@ -56,25 +60,25 @@ class windowLayout(QWidget):
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.ButtonLayout.addItem(self.verticalSpacer,0 ,0)
 
-        self.button_1 = TrainSwitch(self, "1")
-        self.button_2 = TrainSwitch(self, "2")
-        self.button_3 = TrainSwitch(self, "3")
-        self.button_4 = TrainSwitch(self, "4")
-        self.button_5 = TrainSwitch(self, "5")
-        self.button_6 = TrainSwitch(self, "6")
-        self.button_7 = TrainSwitch(self, "7")
-        self.button_8 = TrainSwitch(self, "8")
-        self.button_9 = TrainSwitch(self, "9")
-        self.button_10 = TrainSwitch(self, "10")
-        self.button_11 = TrainSwitch(self, "11")
-        self.button_12 = TrainSwitch(self, "12")
-        self.button_13 = TrainSwitch(self, "13")
-        self.button_14 = TrainSwitch(self, "14")
-        self.button_15 = TrainSwitch(self, "15")
-        self.button_16 = TrainSwitch(self, "16")
-        self.button_17 = TrainSwitch(self, "17")
-        self.button_18 = TrainSwitch(self, "18")
-        self.button_19 = TrainSwitch(self, "19")
+        self.button_1 = TrainSwitch(self, "1", "11")
+        self.button_2 = TrainSwitch(self, "2", "12")
+        self.button_3 = TrainSwitch(self, "3", "13")
+        self.button_4 = TrainSwitch(self, "4", "14")
+        self.button_5 = TrainSwitch(self, "5", "15")
+        self.button_6 = TrainSwitch(self, "6", "16")
+        self.button_7 = TrainSwitch(self, "7", "17")
+        self.button_8 = TrainSwitch(self, "8", "21")
+        self.button_9 = TrainSwitch(self, "9", "22")
+        self.button_10 = TrainSwitch(self, "10", "23")
+        self.button_11 = TrainSwitch(self, "11", "24")
+        self.button_12 = TrainSwitch(self, "12", "25")
+        self.button_13 = TrainSwitch(self, "13", "26")
+        self.button_14 = TrainSwitch(self, "14", "27")
+        self.button_15 = TrainSwitch(self, "15", "31")
+        self.button_16 = TrainSwitch(self, "16", "32")
+        self.button_17 = TrainSwitch(self, "17", "33")
+        self.button_18 = TrainSwitch(self, "18", "34")
+        self.button_19 = TrainSwitch(self, "19", "35")
 
         self.ButtonLayout.addLayout(self.button_1.layout, 1, 0)        
         self.ButtonLayout.addLayout(self.button_2.layout, 1, 1)       
