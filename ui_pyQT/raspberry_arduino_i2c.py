@@ -15,10 +15,7 @@ def write_i2c_arduino(command):
     address = math.floor(int(command) / 100) + 1 
     command_send = int(command) % 100
     
-    if address == 2:
-        bus = SMBus(1) #indicates /dev/ic2-1
-        bus.write_byte(address, command_send)
-    else:
-        print(command)
+    bus = SMBus(1) #indicates /dev/ic2-1
+    bus.write_byte(address, command_send)
 
     print(command)
