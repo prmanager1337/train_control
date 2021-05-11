@@ -15,6 +15,6 @@ def write_i2c_arduino(command):
     command_send = command % 100
 
     bus = SMBus(1) # indicates /dev/ic2-1
-	bus.write_byte(address, command_send) # switch it on
+	bus.write_byte(address, 0x2) # switch it on
 
     print(command)
