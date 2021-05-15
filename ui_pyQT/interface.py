@@ -7,7 +7,7 @@
 # Imports
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu
-from Widget_switch import *
+from widget_switch import *
 # =============================================================================
 
 class Window(QMainWindow):

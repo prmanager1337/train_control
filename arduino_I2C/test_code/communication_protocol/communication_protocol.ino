@@ -10,7 +10,7 @@
 
 
 
-int i2c_adress;
+int i2c_adress, conf = 0;
 
 void setup() {
   pinMode(A5, OUTPUT); //I2C Communication Pin
@@ -34,9 +34,9 @@ void setup() {
   pinMode(2, OUTPUT); //Train switch control
   pinMode(1, OUTPUT); //Train switch control
   pinMode(0, OUTPUT); //Train switch control
-  
-  i2c_adress = set_adress();
-  Wire.begin(i2c_adress);
+
+  Serial.begin(115200);
+  Wire.begin(set_adress());
 
   Wire.onReceive(receiveEvent);
 
@@ -64,8 +64,8 @@ int set_adress() {
 }
 
 void receiveEvent(int howMany) {
-
-  int number_array[7] = { -1, 0, 1, 2, 3, 4, 5 } //Array for calulating the correct pin to toggle for switches in the state of 1
+  
+  int switch_number, switch_setting, number_array[7] = { -1, 0, 1, 2, 3, 4, 5 }; //Array for calulating the correct pin to toggle for switches in the state of 1
 
   while (Wire.available()) { // loop through all but the last
     int switch_command = Wire.read(); // receive byte as a character
@@ -82,11 +82,36 @@ void receiveEvent(int howMany) {
         toggle = switch_number * 2 - 1;
         digitalWrite(toggle, HIGH);
     }
-    delay(300);
+    delay(500);
     digitalWrite(toggle, LOW);
   }
 }
 
 void loop() {
-  delay(100);
+  int x, switch_number, switch_setting;
+  
+  if(i2c_adress == 1){
+    while (!Serial.available());
+
+    x = Serial.readString().toInt();
+    int toggle = 0;
+    switch_number = x / 10;
+    switch_setting = x % 10;
+
+    if(switch_setting == 1){
+      toggle = switch_number * 2 - 1;
+      digitalWrite(toggle, HIGH);
+    }
+    else if(switch_setting == 2){
+      toggle = switch_number * 2;
+      digitalWrite(toggle, HIGH);
+    }
+    Serial.print(conf); //Confirm measeage recived  
+    delay(1000);
+    digitalWrite(toggle, LOW);
+  }
+  else{
+    delay(100);
+  }
+
 }
