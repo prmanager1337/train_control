@@ -39,12 +39,12 @@ class TrainSwitch(QWidget):
         self.led.setChecked(not self.led.isChecked())
 
         if self.button.isChecked(): 
-            #write_serial_arduino(self.command_routing + "1")
-            write_i2c_arduino(self.command_routing + "1")
+            write_serial_arduino(self.command_routing + "1")
+            #write_i2c_arduino(self.command_routing + "1")
         # if it is unchecked 
         else: 
-            #write_serial_arduino(self.command_routing + "2")
-            write_i2c_arduino(self.command_routing + "2")
+            write_serial_arduino(self.command_routing + "2")
+            #write_i2c_arduino(self.command_routing + "2")
 
     
 
