@@ -8,7 +8,7 @@
 from LedIndicatorWidget import *
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtGui import *
-#from serial_arduino_com import write_serial_arduino
+from serial_arduino_com import write_serial_arduino
 from raspberry_arduino_i2c import write_i2c_arduino
 # =============================================================================
 
