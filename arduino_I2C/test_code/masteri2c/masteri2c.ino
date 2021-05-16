@@ -14,8 +14,6 @@
 int i2c_adress, conf = 0;
 
 void setup() {
-  pinMode(A5, OUTPUT); //I2C Communication Pin
-  pinMode(A4, OUTPUT); //I2C Communication Pin
   pinMode(A3, INPUT); //DIP switch
   pinMode(A2, INPUT); //DIP switch
   pinMode(A1, INPUT); //DIP switch
@@ -47,7 +45,9 @@ void loop() {
     while (!Serial.available());
 
     x = Serial.readString().toInt();
-    
+
+    Serial.print(conf); //Confirm measeage recived 
+
     address = floor(x / 100) + 1;
     command_send = x % 100;
     
@@ -55,9 +55,4 @@ void loop() {
     Wire.beginTransmission(address); // transmit to device #4
     Wire.write(command_send);              // sends one byte  
     Wire.endTransmission();    // stop transmitting
-
-
-    Serial.print(conf); //Confirm measeage recived  
-    delay(1000);
-
 }
