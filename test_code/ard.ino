@@ -13,7 +13,6 @@
 int i2c_adress, conf = 0;
 
 void setup() {
-
   pinMode(A3, INPUT); //DIP switch
   pinMode(A2, INPUT); //DIP switch
   pinMode(A1, INPUT); //DIP switch
