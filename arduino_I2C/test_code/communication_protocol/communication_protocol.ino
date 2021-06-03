@@ -69,7 +69,8 @@ int set_adress() {
   if(digitalRead(A3) == 1){
     bitSet(adress, 2);
   }
-  
+
+  digitalWrite(A0, LOW);
   adress = adress + 1;
   return adress;
 }
