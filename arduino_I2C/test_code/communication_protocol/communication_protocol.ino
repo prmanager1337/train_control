@@ -2,18 +2,15 @@
 // Created By  : Anton Sundqvist
 // Created Date: 2021-05-11
 /* =============================================================================
-
+    Code for handeling the i2c slave communication and switching of eacg rail 
+    switch of the Märklin rail switches.
    =============================================================================*/
 // Imports
 #include <Wire.h>
 // =============================================================================
-
-
-
-int i2c_adress, conf = 0;
+bool set_flag = true;
 
 void setup() {
-
   pinMode(A3, INPUT); //DIP switch
   pinMode(A2, INPUT); //DIP switch
   pinMode(A1, INPUT); //DIP switch
@@ -34,11 +31,26 @@ void setup() {
   pinMode(1, OUTPUT); //Train switch control
   pinMode(0, OUTPUT); //Train switch control
 
-  Serial.begin(115200);
-  Wire.begin(set_adress());
-  
+  Wire.begin(2);
   Wire.onReceive(receiveEvent);
+}
 
+void toggle_low(){
+  digitalWrite(0, LOW);
+  digitalWrite(1, LOW);
+  digitalWrite(2, LOW);
+  digitalWrite(3, LOW);
+  digitalWrite(4, LOW);
+  digitalWrite(5, LOW);
+  digitalWrite(6, LOW);
+  digitalWrite(7, LOW);
+  digitalWrite(8, LOW);
+  digitalWrite(9, LOW);
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
+  digitalWrite(12, LOW);
+  digitalWrite(13, LOW);
+  set_flag = false;
 }
 
 //Sets the i2c adress of the decive based on the state of the DIP switch
@@ -63,54 +75,29 @@ int set_adress() {
 }
 
 void receiveEvent(int howMany) {
+  int number_array[7] = { -1, 0, 1, 2, 3, 4, 5 }; //Array for calulating the correct pin to toggle for switches in the state of 1
   
-  int switch_number, switch_setting, number_array[7] = { -1, 0, 1, 2, 3, 4, 5 }; //Array for calulating the correct pin to toggle for switches in the state of 1
+  int switch_command = Wire.read();
+  int toggle = 0; //Initelize the toggle of the switch
+  int switch_number = switch_command  / 10;
+  int switch_setting = switch_command  % 10;
 
-  while (Wire.available()) { // loop through all but the last
-    int switch_command = Wire.read(); // receive byte as a character
-
-    int toggle = 0; //Initelize the toggle of the switch
-    switch_number = switch_command  / 10;
-    switch_setting = switch_command  % 10;
-
-    if(switch_setting == 1){
-        toggle = switch_number + number_array[switch_number - 1];
-        digitalWrite(toggle, HIGH);
-    }
-    else if(switch_setting == 2){ 
-        toggle = switch_number * 2 - 1;
-        digitalWrite(toggle, HIGH);
-    }
-    delay(500);
-    digitalWrite(toggle, LOW);
+  if(switch_setting == 1){
+      toggle = switch_number + number_array[switch_number - 1];
+      digitalWrite(toggle, HIGH);
+      set_flag = true;
+  }
+  else if(switch_setting == 2){ 
+      toggle = switch_number * 2 - 1;
+      digitalWrite(toggle, HIGH);
+      set_flag = true;
   }
 }
 
 void loop() {
-  int x, switch_number, switch_setting;
-  
-  if(i2c_adress == 1){
-    while (!Serial.available());
-
-    x = Serial.readString().toInt();
-    int toggle = 0;
-    switch_number = x / 10;
-    switch_setting = x % 10;
-
-    if(switch_setting == 1){
-      toggle = switch_number * 2 - 1;
-      digitalWrite(toggle, HIGH);
-    }
-    else if(switch_setting == 2){
-      toggle = switch_number * 2;
-      digitalWrite(toggle, HIGH);
-    }
-    Serial.print(conf); //Confirm measeage recived  
-    delay(1000);
-    digitalWrite(toggle, LOW);
+  delay(100);
+  if(set_flag == true){
+    delay(500);
+    toggle_low();
   }
-  else{
-    delay(100);
-  }
-
 }
