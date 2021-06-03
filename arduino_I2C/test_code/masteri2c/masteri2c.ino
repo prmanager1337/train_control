@@ -24,7 +24,7 @@ void loop() {
       address = floor(x / 100);
       command_send = x % 100;  
 
-      Wire.beginTransmission(address); // transmit to device #4
+      Wire.beginTransmission(address); // transmit to device
       Wire.write(command_send); // sends one byte  
       Wire.endTransmission(); // stop transmitting 
       
