@@ -21,10 +21,10 @@ void loop() {
       digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
       x = Serial.readString().toInt();
       
-      //address = floor(x / 100);
+      address = floor(x / 100);
       command_send = x % 100;  
 
-      Wire.beginTransmission(2); // transmit to device #4
+      Wire.beginTransmission(address); // transmit to device #4
       Wire.write(command_send); // sends one byte  
       Wire.endTransmission(); // stop transmitting 
       

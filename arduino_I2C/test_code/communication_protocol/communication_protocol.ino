@@ -14,7 +14,8 @@ void setup() {
   pinMode(A3, INPUT); //DIP switch
   pinMode(A2, INPUT); //DIP switch
   pinMode(A1, INPUT); //DIP switch
-  pinMode(A0, INPUT); //DIP switch
+
+  pinMode(A0, OUTPUT); //DIP switch
 
   pinMode(13, OUTPUT); //Train switch control
   pinMode(12, OUTPUT); //Train switch control
@@ -31,7 +32,7 @@ void setup() {
   pinMode(1, OUTPUT); //Train switch control
   pinMode(0, OUTPUT); //Train switch control
 
-  Wire.begin(2);
+  Wire.begin(set_adress());
   Wire.onReceive(receiveEvent);
 }
 
@@ -57,25 +58,25 @@ void toggle_low(){
 int set_adress() {
 
   int adress = 0;
+  digitalWrite(A0, HIGH);
 
-  if(digitalRead(A0) == 1){
+  if(digitalRead(A1) == 1){
     bitSet(adress, 0);
   }
-  if(digitalRead(A1) == 1){
+  if(digitalRead(A2) == 1){
     bitSet(adress, 1);
   }
-  if(digitalRead(A2) == 1){
+  if(digitalRead(A3) == 1){
     bitSet(adress, 2);
   }
-  if(digitalRead(A3) == 1){
-    bitSet(adress, 3);
-  }
-
+  
+  adress = adress + 1;
   return adress;
 }
 
 void receiveEvent(int howMany) {
-  int number_array[7] = { -1, 0, 1, 2, 3, 4, 5 }; //Array for calulating the correct pin to toggle for switches in the state of 1
+  int number_array[7] = {-1, 0, 1, 2, 3, 4, 5 }; //Array for calulating the correct pin to toggle for switches in the state of 1
+  int switch_select[14] = {10, 12, 0, 2, 4, 6, 8, 9, 11, 13, 1, 3, 5, 7}; //Array for arange the output pins to the correct transistor
   
   int switch_command = Wire.read();
   int toggle = 0; //Initelize the toggle of the switch
@@ -84,12 +85,12 @@ void receiveEvent(int howMany) {
 
   if(switch_setting == 1){
       toggle = switch_number + number_array[switch_number - 1];
-      digitalWrite(toggle, HIGH);
+      digitalWrite(switch_select[toggle], HIGH);
       set_flag = true;
   }
   else if(switch_setting == 2){ 
       toggle = switch_number * 2 - 1;
-      digitalWrite(toggle, HIGH);
+      digitalWrite(switch_select[toggle], HIGH);
       set_flag = true;
   }
 }
