@@ -22,8 +22,6 @@ class Window(QMainWindow):
         self.setFixedHeight(height)
 
         self.label = QLabel(self)
-        pixmap = QPixmap('train.png')
-        self.label.setPixmap(pixmap)
         self.centralWidget = self.label
         self.setCentralWidget(self.centralWidget)
 

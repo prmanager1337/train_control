@@ -26,9 +26,9 @@ class TrainSwitch(QWidget):
                                     "border-width: 2px;"
                                     "border-radius: 10px;"
                                     "border-color: beige;"
-                                    "font: bold 14px;"
-                                    "min-width: 14em;"
-                                    "min-height: 5em;"
+                                    "font: bold 20px;"
+                                    "min-width: 7em;"
+                                    "min-height: 3em;"
                                     "padding: 2px;")
 
 
