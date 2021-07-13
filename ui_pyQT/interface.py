@@ -31,5 +31,6 @@ class Window(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = Window()
-    win.showFullScreen() 
+    win.show()
+    #win.showFullScreen() 
     sys.exit(app.exec_())

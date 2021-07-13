@@ -55,7 +55,19 @@ class TrainSwitch(QWidget):
             write_serial_arduino(self.command_routing + "2")
             #write_i2c_arduino(self.command_routing + "2")
 
-    
+class quitApp(QWidget):
+    def __init__(self, parent):
+        super(QWidget, self).__init__(parent)
+        self.layout = QHBoxLayout()
+        self.button = QPushButton()
+        self.button.setCheckable(True)
+        self.button.setText("Exit Application")
+
+        self.layout.addWidget(self.button)
+        self.button.clicked.connect(lambda: self.button_clicked())
+
+    def button_clicked(self):
+        QCoreApplication.quit()
 
 
 class windowLayout(QWidget):
@@ -65,9 +77,6 @@ class windowLayout(QWidget):
         self.MapLayout = QHBoxLayout()
         self.ButtonLayout = QGridLayout()
         self.ButtonLayout.setAlignment(Qt.AlignLeft)
-
-        #self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        #self.ButtonLayout.addItem(self.verticalSpacer,0 ,0)
 
         self.button_1 = TrainSwitch(self, "1", "11")
         self.button_2 = TrainSwitch(self, "2", "12")
@@ -89,6 +98,8 @@ class windowLayout(QWidget):
         self.button_18 = TrainSwitch(self, "18", "34")
         self.button_19 = TrainSwitch(self, "19", "35")
 
+        self.button_20 = quitApp(self)
+
         self.ButtonLayout.addLayout(self.button_1.layout, 1, 0)        
         self.ButtonLayout.addLayout(self.button_2.layout, 1, 1)       
         self.ButtonLayout.addLayout(self.button_3.layout, 1, 2)
@@ -108,6 +119,7 @@ class windowLayout(QWidget):
         self.ButtonLayout.addLayout(self.button_17.layout, 5, 0) 
         self.ButtonLayout.addLayout(self.button_18.layout, 5, 1) 
         self.ButtonLayout.addLayout(self.button_19.layout, 5, 2) 
+        self.ButtonLayout.addLayout(self.button_20.layout, 5, 3) 
 
 
         self.MapLayout.addLayout(self.ButtonLayout)
