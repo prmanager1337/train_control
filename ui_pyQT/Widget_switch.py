@@ -21,15 +21,15 @@ class TrainSwitch(QWidget):
         self.led = LedIndicator()
         self.button.setCheckable(True)
         self.button.setText("Växel " + train_switch)
-        #self.button.setStyleSheet(  "background-color: grey;" 
-        #                            "border-style: outset;"
-        #                            "border-width: 2px;"
-        #                            "border-radius: 10px;"
-        #                            "border-color: beige;"
-        #                            "font: bold 14px;"
-        #                            "min-width: 14em;"
-        #                            "min-height: 5em;"
-        #                            "padding: 2px;")
+        self.button.setStyleSheet(  "background-color: grey;" 
+                                    "border-style: outset;"
+                                    "border-width: 2px;"
+                                    "border-radius: 10px;"
+                                    "border-color: beige;"
+                                    "font: bold 14px;"
+                                    "min-width: 14em;"
+                                    "min-height: 5em;"
+                                    "padding: 2px;")
 
 
         self.led.setDisabled(True)  # Make the led non clickable
