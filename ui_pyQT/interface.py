@@ -7,7 +7,7 @@
 # Imports
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu
-from widget_switch import *
+from Widget_switch import *
 # =============================================================================
 
 class Window(QMainWindow):
@@ -22,7 +22,7 @@ class Window(QMainWindow):
         self.setFixedHeight(height)
 
         self.label = QLabel(self)
-        pixmap = QPixmap('traingui1.png')
+        pixmap = QPixmap('train.png')
         self.label.setPixmap(pixmap)
         self.centralWidget = self.label
         self.setCentralWidget(self.centralWidget)
