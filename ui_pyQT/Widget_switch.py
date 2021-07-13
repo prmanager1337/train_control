@@ -9,7 +9,6 @@ from LedIndicatorWidget import *
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtGui import *
 from serial_arduino_com import write_serial_arduino
-from raspberry_arduino_i2c import write_i2c_arduino
 # =============================================================================
 
 class TrainSwitch(QWidget):
@@ -22,6 +21,16 @@ class TrainSwitch(QWidget):
         self.led = LedIndicator()
         self.button.setCheckable(True)
         self.button.setText("Växel " + train_switch)
+        #self.button.setStyleSheet(  "background-color: grey;" 
+        #                            "border-style: outset;"
+        #                            "border-width: 2px;"
+        #                            "border-radius: 10px;"
+        #                            "border-color: beige;"
+        #                            "font: bold 14px;"
+        #                            "min-width: 14em;"
+        #                            "min-height: 5em;"
+        #                            "padding: 2px;")
+
 
         self.led.setDisabled(True)  # Make the led non clickable
 
@@ -57,8 +66,8 @@ class windowLayout(QWidget):
         self.ButtonLayout = QGridLayout()
         self.ButtonLayout.setAlignment(Qt.AlignLeft)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        self.ButtonLayout.addItem(self.verticalSpacer,0 ,0)
+        #self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        #self.ButtonLayout.addItem(self.verticalSpacer,0 ,0)
 
         self.button_1 = TrainSwitch(self, "1", "11")
         self.button_2 = TrainSwitch(self, "2", "12")
