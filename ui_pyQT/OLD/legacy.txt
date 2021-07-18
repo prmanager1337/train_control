@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHB
 # =============================================================================
 
 def gui_start():
+
     def button1_clicked():
         led1.setChecked(not led1.isChecked())
         led2.setChecked(not led2.isChecked())
